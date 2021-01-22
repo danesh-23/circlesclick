@@ -22,13 +22,18 @@ struct Circles: View {
                 Circle()
                     .fill(color)
                     .frame(width: width, height: height)
+                    .onTapGesture(count: 3, perform: {
+                        self.color = Color.blue
+                    })
                     .onLongPressGesture {
-                        if self.color == Color.blue {
-                            self.color = Color.red
-                        } else {
-                            self.color = Color.blue
-                        }
+                        self.color = Color(red: .random(), green: .random(), blue: .random())
                     }
             )
+    }
+}
+
+extension Double {
+    static func random() -> Double {
+        return Double(arc4random()) / Double(UInt32.max)
     }
 }
